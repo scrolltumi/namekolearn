@@ -30,8 +30,11 @@ class AlgosService:
         if (self.codedDict):
             originalStrings = list(self.codedDict.keys())
             encodedStrings = list(self.codedDict.values())
-            return originalStrings[encodedStrings.index(encodedString)]
-        return 'not in saved list.This is an inadequate solution'
+            try:
+                return originalStrings[encodedStrings.index(encodedString)]
+            except:
+                return 'This encoding is not stored'
+        return 'Encoding not stored. This is an inadequate solution'
 
 def test_algos(self):
     # create worker with mock dependencies
@@ -44,4 +47,12 @@ def test_algos(self):
     # test huffmanEncode 
     encoded = service.huffmanEncode(['FR', 'UK', 'BE', 'IT', 'FR', 'IT', 'GR', 'FR', 'NL', 'BE', 'DE'])
     assert encoded == {'FR': '10', 'UK': '011', 'BE': '110', 'IT': '111', 'GR': '010', 'NL': '001', 'DE': '000'}
+
+    # test huffmanDecode 
+    encoded = service.huffmanDecode(encodedString='010')
+    assert encoded == 'GR'
+
+    # test huffmanDecode failure
+    encoded = service.huffmanDecode(encodedString='014')
+    assert encoded == 'This encoding is not stored'
     

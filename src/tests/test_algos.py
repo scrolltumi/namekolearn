@@ -12,4 +12,12 @@ def test_algos():
     # test huffmanEncode 
     encoded = service.huffmanEncode(['FR', 'UK', 'BE', 'IT', 'FR', 'IT', 'GR', 'FR', 'NL', 'BE', 'DE'])
     assert encoded == {'FR': '10', 'UK': '011', 'BE': '110', 'IT': '111', 'GR': '010', 'NL': '001', 'DE': '000'}
+
+    # test huffmanDecode 
+    encoded = service.huffmanDecode(encodedString='010')
+    assert encoded == 'GR'
+
+    # test huffmanDecode failure
+    encoded = service.huffmanDecode(encodedString='014')
+    assert encoded == 'This encoding is not stored'
  

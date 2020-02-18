@@ -12,3 +12,5 @@ WORKDIR /app
 RUN pip install nameko
 
 COPY . .
+
+
