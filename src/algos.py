@@ -11,7 +11,7 @@ from nameko.testing.services import worker_factory
 
 class AlgosService:
     name = "algos_service"
-    codec = {}
+    codedDict = {}
 
     @rpc
     def squareOddNumbers(self, integers):
@@ -22,13 +22,16 @@ class AlgosService:
     
     @rpc
     def huffmanEncode(self, stringList):
-        return huffman.codebook(Counter(stringList).items())
+        self.codedDict = huffman.codebook(Counter(stringList).items())
+        return self.codedDict
 
     @rpc
     def huffmanDecode(self, encodedString):
-        #Some code to decode
-        #Still to do. Not sure I understand
-        return encodedString
+        if (self.codedDict):
+            originalStrings = list(self.codedDict.keys())
+            encodedStrings = list(self.codedDict.values())
+            return originalStrings[encodedStrings.index(encodedString)]
+        return 'not in saved list.This is an inadequate solution'
 
 def test_algos(self):
     # create worker with mock dependencies
