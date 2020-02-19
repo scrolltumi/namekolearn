@@ -1,0 +1,16 @@
+version: "2"
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+  src:
+    build:
+      context: src
+    depends_on:
+      - rabbit
+    environment:
+        RABBIT_PASSWORD: "guest"
+        RABBIT_USER: "guest"
+        RABBIT_HOST: "rabbit"
+        RABBIT_PORT: "5672"
